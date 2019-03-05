@@ -1,3 +1,35 @@
 ---
-- hosts: all
+- name: Configure the Controller Nodes
+  hosts: all
+  sudo: yes
+  remote_user: openstack
+  gather_facts: no
+  roles:
+    - common
+    - mariadb
+    - rabbitmq
+    - memcached
+    - keystone
+    - glance
+    - neutron
+    - nova
 
+- name: Configure the Compute Nodes
+  hosts: all
+  sudo: yes
+  remote_user: openstack
+  gather_facts: no
+  roles:
+    - common
+    - neutron
+    - nova
+    
+- name: Add the compute node to the cell database
+  hosts: all
+  sudo: yes
+  remote_user: openstack
+  gather_facts: no
+  roles:
+    - cell
+    
+  
