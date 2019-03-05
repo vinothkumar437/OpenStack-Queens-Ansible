@@ -1,4 +1,6 @@
 ---
+# This playbook deploys the OpenStack Cloud Deployment(Single Controller, Multi Compute Node).
+
 - name: Configure the Controller Nodes
   hosts: controller
   sudo: yes
