@@ -7,7 +7,7 @@
   remote_user: openstack
   gather_facts: no
   roles:
-    - common
+    - controller-common
     - mariadb
     - rabbitmq
     - memcached
@@ -22,9 +22,9 @@
   remote_user: openstack
   gather_facts: no
   roles:
-    - common
-    - neutron
-    - nova
+    - compute-common
+    - compute-neutron
+    - compute-nova
     
 - name: Add the compute node to the cell database
   hosts: controller
@@ -32,6 +32,6 @@
   remote_user: openstack
   gather_facts: no
   roles:
-    - cell
+    - compute-cell
     
   
