@@ -1,6 +1,6 @@
 ---
 - name: Configure the Controller Nodes
-  hosts: all
+  hosts: controller
   sudo: yes
   remote_user: openstack
   gather_facts: no
@@ -15,7 +15,7 @@
     - nova
 
 - name: Configure the Compute Nodes
-  hosts: all
+  hosts: compute
   sudo: yes
   remote_user: openstack
   gather_facts: no
@@ -25,7 +25,7 @@
     - nova
     
 - name: Add the compute node to the cell database
-  hosts: all
+  hosts: controller
   sudo: yes
   remote_user: openstack
   gather_facts: no
