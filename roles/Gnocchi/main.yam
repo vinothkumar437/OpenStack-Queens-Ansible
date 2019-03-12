@@ -1,0 +1,55 @@
+ #  openstack user create --domain default --password service_pass ceilometer
+ 
+ #  openstack role add --project service --user ceilometer admin
+ 
+ #  openstack user create --domain default --password service_pass gnocchi
+ 
+ #  openstack service create --name gnocchi --description "Metric Service" metric
+ 
+ #  openstack role add --project service --user gnocchi admin
+ 
+ #  openstack endpoint create --region RegionOne metric public http://controller:8041
+ 
+ #  openstack endpoint create --region RegionOne metric internal http://controller:8041
+ 
+ #  openstack endpoint create --region RegionOne metric admin http://controller:8041
+ 
+ MYSQL DATABASE CREATION :-
+ 
+ #  yum install epel-release -y
+ 
+ #  yum install openstack-gnocchi-api openstack-gnocchi-metricd python-gnocchiclient
+ 
+ #  mv /etc/gnocchi/gnocchi.conf /etc/gnocchi/gnocchi.conf.org 
+ 
+ #  vim /etc/gnocchi/gnocchi.conf
+ 
+ [DEFAULT]
+log_dir = /var/log/gnocchi
+
+[api]
+auth_mode = keystone
+
+[database]
+backend = sqlalchemy
+
+# MariaDB connection info
+[indexer]
+url = mysql+pymysql://gnocchi:password@10.0.0.30/gnocchi
+
+[storage]
+driver = file
+file_basepath = /var/lib/gnocchi
+
+# Keystone auth info
+[keystone_authtoken]
+www_authenticate_uri = http://10.0.0.30:5000
+auth_url = http://10.0.0.30:5000
+memcached_servers = 10.0.0.30:11211
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+project_name = service
+username = gnocchi
+password = service_pass
+service_token_roles_required = true
