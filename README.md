@@ -1,4 +1,4 @@
-# Automated OpenStack Installation ( Queens ) through Ansible Playbooks
+# Automated OpenStack Installation ( QUEENS ) through Ansible Playbooks
 
 Vinothkumar P<br>
 Email ID: vinothkumarpcse@gmail.com<br>
