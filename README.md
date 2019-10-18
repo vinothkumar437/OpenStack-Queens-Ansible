@@ -2,7 +2,7 @@
 
 Vinothkumar P<br>
 Email ID: vinothkumarpcse@gmail.com<br>
-Address: Bengaluru, Karanataka, India.<br><br>
+Address: Bengaluru, Karanataka, India.<br>
 
 <b><h3>Introduction</h3></b>
 <br>
