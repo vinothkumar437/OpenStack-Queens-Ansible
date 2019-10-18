@@ -1,37 +1,9 @@
----
-# This playbook deploys the OpenStack Cloud Deployment(Single Controller, Multi Compute Node).
+- name: OpenStack Installation
+  hosts: all
+  roles:
+  - common
 
-- name: Configure the Controller Nodes
+- name: OpenStack Controller Installation
   hosts: controller
-  sudo: yes
-  remote_user: openstack
-  gather_facts: no
   roles:
-    - controller-common
-    - mariadb
-    - rabbitmq
-    - memcached
-    - keystone
-    - glance
-    - neutron
-    - nova
-
-- name: Configure the Compute Nodes
-  hosts: compute
-  sudo: yes
-  remote_user: openstack
-  gather_facts: no
-  roles:
-    - compute-common
-    - compute-neutron
-    - compute-nova
-    
-- name: Add the compute node to the cell database
-  hosts: controller
-  sudo: yes
-  remote_user: openstack
-  gather_facts: no
-  roles:
-    - compute-cell
-    
-  
+  - controller
