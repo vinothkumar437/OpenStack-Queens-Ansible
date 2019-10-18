@@ -5,7 +5,7 @@ Email ID: vinothkumarpcse@gmail.com<br>
 Address: Bengaluru, Karanataka, India.<br>
 
 <b><h3>Introduction</h3></b>
-<br>
+
 This Ansible playbooks was made to automate the tasks of creating a virtualization infrastructure based on OpenStack.<br>
 Used CentOS 7 two nodes.
 <br>
