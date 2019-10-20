@@ -1,0 +1,5 @@
+---
+- include: common.yaml
+- include: mysql.yaml
+- include: message_queue.yaml
+- include: keystone.yaml
