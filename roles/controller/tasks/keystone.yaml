@@ -1,0 +1,31 @@
+- name: Create a new database with name 'keystone'
+  mysql_db:
+    name: keystone
+    state: present
+
+- name: Ensure no user named keystoneUser exists, also passing in the auth credentials.
+  mysql_user:
+    name: keystoneUser
+    password: "{{ keystone_password }}"
+    priv: "{{ item }}"
+    state: present
+  with_items:
+  - "keystone.*:ALL,GRANT"
+
+- name: Install and configure keystone components
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - openstack-keystone
+  - httpd
+  - mod_wsgi
+
+- name: Copy the keystone template a file, using symbolic modes (equivalent to 0640)
+  template:
+    src: keystone.conf.j2
+    dest: /etc/keystone/keystone.conf
+    owner: root
+    group: keystone
+    mode: '0640'
+    backup: yes
