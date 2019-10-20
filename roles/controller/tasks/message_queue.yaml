@@ -1,0 +1,41 @@
+- name: Install and configure RabbitMQ components
+  yum:
+    name: rabbitmq-server
+    state: present
+
+- name: Enable and Start the RabbitMQ Service
+  service:
+    name: rabbitmq-server
+    state: started
+    enabled: yes
+
+- name: Add user to server and assign full access control on / vhost.
+  rabbitmq_user:
+    user: "{{ rabbitmq_user_name }}"
+    password: "{{ rabbitmq_user_password }}"
+    permissions:
+      - vhost: /
+        configure_priv: .*
+        read_priv: .*
+        write_priv: .*
+    state: present
+
+- name: Install and configure Memcached components
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - memcached
+  - python-memcached
+
+- name: Replace a localhost entry with our own /etc/sysconfig/memcached file
+  replace:
+    path: /etc/sysconfig/memcached
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: Enable and Start the Memcached Service
+  service:
+    name: memcached
+    state: started
+    enabled: yes
